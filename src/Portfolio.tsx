@@ -1,0 +1,474 @@
+import React, { useMemo, useState } from 'react'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { Button } from './components/ui/Button'
+import { Card, CardContent, CardHeader, CardTitle } from './components/ui/Card'
+import { Badge } from './components/ui/Badge'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from './components/ui/Dialog'
+import { Input } from './components/ui/Input'
+import { Separator } from './components/ui/Separator'
+import {
+  ArrowUpRight,
+  Download,
+  ExternalLink,
+  Mail,
+  MapPin,
+  Search,
+} from 'lucide-react'
+import styles from './Portfolio.module.css'
+
+type Project = {
+  id: string
+  title: string
+  year: string
+  category:
+    | 'Branding'
+    | 'Editorial'
+    | 'Digital'
+    | 'Packaging'
+    | 'Illustration'
+    | 'Other'
+  tags: string[]
+  summary: string
+  role: string
+  tools: string[]
+  coverAlt: string
+  links?: { label: string; href: string }[]
+  highlights: string[]
+  process: { label: string; content: string }[]
+  gallery?: { label: string; alt: string }[]
+}
+
+const PROFILE = {
+  name: 'Name',
+  title: 'Graphic Designer',
+  location: 'Auckland, NZ',
+  tagline:
+    'I design clear, confident brands and systems that scale across print + digital.',
+  email: 'you@example.com',
+  availability: 'Available for freelance • 2026',
+  socials: [{ label: 'LinkedIn', href: '#' }],
+  resumeHref: '#',
+}
+
+const PROJECTS: Project[] = [
+  {
+    id: 'cobalt-roastery',
+    title: 'Cobalt Roastery',
+    year: '2025',
+    category: 'Branding',
+    tags: ['Identity', 'Packaging', 'Art Direction'],
+    summary:
+      'A modern coffee brand built around a modular logotype and bold color system designed for high shelf impact.',
+    role: 'Lead Designer',
+    tools: ['Illustrator', 'InDesign', 'Figma'],
+    coverAlt: 'Cobalt Roastery brand identity mockups',
+    links: [
+      { label: 'Live site', href: '#' },
+      { label: 'Case study PDF', href: '#' },
+    ],
+    highlights: [
+      'Created a flexible identity system with 12 modular lockups.',
+      'Reduced label SKUs by 30% through a standardized template.',
+      'Improved in-store recognition with consistent shelf-blocking.',
+    ],
+    process: [
+      {
+        label: 'Challenge',
+        content:
+          'Unify multiple product lines under one brand while keeping room for seasonal releases.',
+      },
+      {
+        label: 'Approach',
+        content:
+          'Designed a modular system: core mark + variable descriptor, supported by a high-contrast palette and typographic hierarchy.',
+      },
+      {
+        label: 'Outcome',
+        content:
+          'A cohesive brand kit that works across packaging, signage, and digital templates for quick rollout.',
+      },
+    ],
+    gallery: [
+      {
+        label: '/images/project/cover.jpg',
+        alt: 'Coffee packaging on a table',
+      },
+      {
+        label: '/images/project/counter.jpg',
+        alt: 'Coffee shop counter scene',
+      },
+    ],
+  },
+]
+
+const NAV = [
+  { id: 'work', label: 'Work' },
+  { id: 'about', label: 'About' },
+  { id: 'services', label: 'Services' },
+  { id: 'contact', label: 'Contact' },
+] as const
+
+type SortKey = 'featured' | 'newest' | 'category'
+
+function initials(name: string) {
+  const parts = name.trim().split(/\s+/).slice(0, 2)
+  return parts.map((p) => p[0]?.toUpperCase()).join('')
+}
+
+function getCategoryOrder(cat: Project['category']) {
+  const order: Record<Project['category'], number> = {
+    Branding: 0,
+    Digital: 1,
+    Editorial: 2,
+    Packaging: 3,
+    Illustration: 4,
+    Other: 5,
+  }
+  return order[cat] ?? 99
+}
+
+export default function PortfolioSite() {
+  const reduceMotion = useReducedMotion()
+  const [query, setQuery] = useState('')
+  const [sort, setSort] = useState<SortKey>('featured')
+  const [activeCategory, setActiveCategory] = useState<
+    Project['category'] | 'All'
+  >('All')
+  const [openId, setOpenId] = useState<string | null>(null)
+
+  const categories = useMemo(() => {
+    const unique = Array.from(new Set(PROJECTS.map((p) => p.category)))
+    unique.sort((a, b) => getCategoryOrder(a) - getCategoryOrder(b))
+    return ['All' as const, ...unique]
+  }, [])
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    let list = PROJECTS.filter((p) => {
+      const matchesQuery =
+        !q ||
+        [p.title, p.summary, p.category, p.year, ...p.tags]
+          .join(' ')
+          .toLowerCase()
+          .includes(q)
+      const matchesCategory =
+        activeCategory === 'All' ? true : p.category === activeCategory
+      return matchesQuery && matchesCategory
+    })
+
+    if (sort === 'newest') {
+      list = [...list].sort((a, b) => Number(b.year) - Number(a.year))
+    } else if (sort === 'category') {
+      list = [...list].sort(
+        (a, b) =>
+          getCategoryOrder(a.category) - getCategoryOrder(b.category) ||
+          a.title.localeCompare(b.title)
+      )
+    }
+
+    return list
+  }, [query, sort, activeCategory])
+
+  const active = useMemo(
+    () => PROJECTS.find((p) => p.id === openId) ?? null,
+    [openId]
+  )
+
+  const container = {
+    hidden: { opacity: 0, y: 8 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: reduceMotion
+        ? { duration: 0 }
+        : { duration: 0.35, ease: 'easeOut' },
+    },
+  }
+
+  return (
+    <div className={styles.page}>
+      <a href="#main" className={`${styles.srOnly} ${styles.skipLink}`}>
+        Skip to content
+      </a>
+
+      <header className={styles.header}>
+        <div className={`${styles.container} ${styles.headerInner}`}>
+          <a
+            href="#top"
+            className={styles.brand}
+            aria-label={`${PROFILE.name} — home`}
+          >
+            <div className={styles.brandMark}>{initials(PROFILE.name)}</div>
+            <div className={styles.brandText}>
+              <div className={styles.brandName}>{PROFILE.name}</div>
+              <div className={styles.brandRole}>{PROFILE.title}</div>
+            </div>
+          </a>
+
+          <nav aria-label="Primary" className={styles.nav}>
+            {NAV.map((item) => (
+              <a key={item.id} href={`#${item.id}`} className={styles.navLink}>
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className={styles.headerActions}>
+            <Button asChild variant="secondary" className={styles.hideOnMobile}>
+              <a href={PROFILE.resumeHref} aria-label="Download resume">
+                <Download size={16} className={styles.iconLeft} /> Resume
+              </a>
+            </Button>
+            <Button asChild>
+              <a href={`mailto:${PROFILE.email}`}>
+                <Mail size={16} className={styles.iconLeft} /> Contact
+              </a>
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <main id="main" className={styles.container}>
+        <section id="top" className={styles.section}>
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className={styles.heroGrid}
+          >
+            <div className={styles.stack}>
+              <div className={styles.heroPill}>
+                <MapPin size={14} />
+                <span>{PROFILE.location}</span>
+                <span aria-hidden>•</span>
+                <span>{PROFILE.availability}</span>
+              </div>
+
+              <h1 className={styles.h1}>{PROFILE.tagline}</h1>
+
+              <p className={styles.lead}>
+                I’m {PROFILE.name} — {PROFILE.title}. I help teams and founders
+                turn complex ideas into clean systems: brand identity, editorial
+                design, and UI.
+              </p>
+
+              <div className={styles.badgeRow}>
+                <Badge>Brand systems</Badge>
+                <Badge>Print + editorial</Badge>
+                <Badge>UI + design tokens</Badge>
+                <Badge>Art direction</Badge>
+              </div>
+
+              <div className={styles.ctaRow}>
+                <Button asChild>
+                  <a href="#work">
+                    View selected work <ArrowUpRight size={16} />
+                  </a>
+                </Button>
+                <Button asChild variant="secondary">
+                  <a href={`mailto:${PROFILE.email}`}>Let’s talk</a>
+                </Button>
+              </div>
+            </div>
+
+            <Card className={styles.card}>
+              <CardHeader>
+                <CardTitle>At a glance</CardTitle>
+              </CardHeader>
+              <CardContent className={styles.stackSm}>
+                <div className={styles.cardTight}>
+                  <div>
+                    <div className={styles.smallTitle}>Specialties</div>
+                    <div className={styles.muted}>Identity • Layout • UI</div>
+                  </div>
+                  <ExternalLink size={16} className={styles.mutedIcon} />
+                </div>
+
+                <div className={styles.cardTight}>
+                  <div>
+                    <div className={styles.smallTitle}>Approach</div>
+                    <div className={styles.muted}>
+                      Systems-first • Accessible
+                    </div>
+                  </div>
+                  <ExternalLink size={16} className={styles.mutedIcon} />
+                </div>
+
+                <Separator />
+
+                <div className={styles.socialRow}>
+                  {PROFILE.socials.map((s) => (
+                    <a key={s.label} href={s.href} className={styles.chipLink}>
+                      {s.label}
+                    </a>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </section>
+
+        <section id="work" className={styles.section}>
+          <div className={styles.workTop}>
+            <div>
+              <h2 className={styles.h2}>Selected work</h2>
+              <p className={styles.subtle}>
+                Clear previews, quick filtering, and expandable case studies.
+              </p>
+            </div>
+
+            <div className={styles.controls}>
+              <div className={styles.searchWrap}>
+                <Search size={16} className={styles.searchIcon} />
+                <Input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search projects…"
+                  className={`${styles.input} ${styles.inputPadLeft}`}
+                  aria-label="Search projects"
+                />
+              </div>
+
+              <div className={styles.selectRow}>
+                <select
+                  value={activeCategory}
+                  onChange={(e) => setActiveCategory(e.target.value as any)}
+                  className={styles.select}
+                  aria-label="Filter by category"
+                >
+                  {categories.map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+
+                <select
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value as SortKey)}
+                  className={styles.select}
+                  aria-label="Sort projects"
+                >
+                  <option value="featured">Featured</option>
+                  <option value="newest">Newest</option>
+                  <option value="category">Category</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.grid}>
+            {filtered.map((p) => (
+              <motion.div
+                key={p.id}
+                initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 8 }}
+                whileInView={
+                  reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
+                }
+                viewport={{ once: true, amount: 0.2 }}
+                transition={reduceMotion ? { duration: 0 } : { duration: 0.35 }}
+              >
+                <Card className={`${styles.card} ${styles.projectCard}`}>
+                  <button
+                    type="button"
+                    onClick={() => setOpenId(p.id)}
+                    className={styles.projectButton}
+                    aria-label={`Open case study: ${p.title}`}
+                  >
+                    <div className={styles.thumb}>
+                      <img
+                        src={
+                          (p.gallery?.[0]?.label ??
+                            '/images/placeholder.jpg') as string
+                        }
+                        alt={p.coverAlt}
+                        className={styles.thumbImg}
+                        loading="lazy"
+                      />
+                      <div className={styles.thumbLabel}>
+                        {p.category} • {p.year}
+                      </div>
+                    </div>
+
+                    <CardHeader>
+                      <CardTitle>{p.title}</CardTitle>
+                      <p className={styles.mutedLineClamp}>{p.summary}</p>
+                    </CardHeader>
+
+                    <CardContent className={styles.stackSm}>
+                      <div className={styles.badgeRow}>
+                        {p.tags.slice(0, 3).map((t) => (
+                          <Badge key={t}>{t}</Badge>
+                        ))}
+                      </div>
+
+                      <div className={styles.viewRow}>
+                        <span className={styles.viewStrong}>
+                          View case study
+                        </span>
+                        <ArrowUpRight size={16} />
+                      </div>
+                    </CardContent>
+                  </button>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        <footer className={styles.footer}>
+          © {new Date().getFullYear()} {PROFILE.name}.
+        </footer>
+      </main>
+
+      <Dialog
+        open={!!active}
+        onOpenChange={(o) => setOpenId(o ? openId : null)}
+      >
+        <DialogContent>
+          {active && (
+            <div className={styles.dialogInner}>
+              <div className={styles.dialogHero}>
+                <img
+                  src={
+                    (active.gallery?.[0]?.label ||
+                      'https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1600&q=80') as string
+                  }
+                  alt={active.coverAlt}
+                  className={styles.dialogHeroImg}
+                />
+              </div>
+
+              <div className={styles.dialogBody}>
+                <DialogHeader>
+                  <DialogTitle>{active.title}</DialogTitle>
+                  <DialogDescription>
+                    {active.category} • {active.year} • {active.role}
+                  </DialogDescription>
+                </DialogHeader>
+
+                <div className={styles.badgeRow}>
+                  {active.tags.map((t) => (
+                    <Badge key={t}>{t}</Badge>
+                  ))}
+                </div>
+
+                <p className={styles.dialogSummary}>{active.summary}</p>
+
+                <div className={styles.dialogActions}>
+                  <Button onClick={() => setOpenId(null)}>Close</Button>
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+}
