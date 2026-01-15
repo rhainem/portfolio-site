@@ -10,7 +10,7 @@
   --r-lg: 18px;
   --r-md: 16px; */
   --bg: #ffffff;
-  --surface: rgba(0, 0, 0, 0.03);
+  --surface: rgba(0, 0, 0, 0.05);
   --border: rgba(0, 0, 0, 0.12);
   --text: rgba(0, 0, 0, 0.9);
   --muted: rgba(0, 0, 0, 0.62);
@@ -30,6 +30,10 @@ body {
   height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
@@ -40,6 +44,7 @@ body {
       transparent 60%
     ),
     var(--bg); */
+  background: var(--bg);
   color: var(--text);
 }
 
@@ -309,6 +314,7 @@ footer {
 /* Small cards inside hero */
 .card {
   border-radius: var(--r-xl);
+  background: var(--bg);
 }
 
 .cardTight {
@@ -320,6 +326,7 @@ footer {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  background: var(--surface);
 }
 
 .smallTitle {
@@ -369,7 +376,7 @@ footer {
 }
 
 .h2 {
-  margin: 0;
+  /* margin: 0; */
   font-size: 22px;
   letter-spacing: -0.02em;
 }
@@ -577,4 +584,152 @@ footer {
 .page h5,
 .page h6 {
   color: inherit;
+}
+
+.aboutGrid {
+  display: grid;
+  gap: 24px;
+}
+@media (min-width: 1024px) {
+  .aboutGrid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.aboutText {
+  max-width: 68ch;
+}
+
+.aboutParagraph {
+  margin: 0;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.aboutCard {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--r-xl);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.aboutMiniCard {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--r-lg);
+  padding: 14px;
+}
+
+.aboutCardInner {
+  padding: 26px;
+}
+
+.aboutCols {
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .aboutCols {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}
+
+.aboutMiniCard {
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: var(--r-lg);
+  padding: 14px;
+}
+
+.servicesGrid {
+  margin-top: 16px;
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 1024px) {
+  .servicesGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.serviceCard {
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  padding: 15px 10px;
+}
+
+.list {
+  margin: 10px 0 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.list li {
+  margin: 6px 0;
+}
+
+.contactCard {
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  padding: 0px 10px 30px 10px;
+}
+
+.contactInner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .contactInner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.contactActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Offset anchor scroll for sticky header */
+section[id] {
+  scroll-margin-top: 88px;
+}
+
+@media (min-width: 768px) {
+  section[id] {
+    scroll-margin-top: 104px;
+  }
+}
+
+.select {
+  height: 40px;
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--text);
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.thumbLabel {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 6px 10px;
+  font-size: 12px;
+  color: var(--muted);
 }

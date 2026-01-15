@@ -15,7 +15,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  /* gap: 8px; */
   height: 40px;
   padding: 0 14px;
   border-radius: var(--radius-md);
@@ -35,6 +35,8 @@
 }
 
 .primary {
+  /* color: #ffffff;
+  background: #000000; */
 }
 .secondary {
   background: transparent;
@@ -66,9 +68,11 @@
   border-radius: 999px;
   padding: 6px 10px;
   font-size: 12px;
-  border: 1px solid var(--border);
+  font-weight: 500;
+  /* border: 1px solid var(--border); */
   background: rgba(255, 255, 255, 0.06);
   color: var(--muted);
+  background: var(--surface);
 }
 .outline {
   background: transparent;
@@ -115,7 +119,7 @@
   flex-direction: column;
   max-height: 90vh;
   overflow: auto;
-  text-align: left;
+  text-align: le;
 }
 
 .dialogHeader {

@@ -366,7 +366,7 @@ export default function PortfolioSite() {
 
               <div className={styles.ctaRow}>
                 <Button asChild>
-                  <a href="#work">
+                  <a href="#work" className="selected">
                     View selected work <ArrowUpRight size={16} />
                   </a>
                 </Button>
@@ -382,7 +382,7 @@ export default function PortfolioSite() {
               </CardHeader>
               <CardContent className={styles.stackSm}>
                 <div className={styles.cardTight}>
-                  <div>
+                  <div className="{styles.special}">
                     <div className={styles.smallTitle}>Specialties</div>
                     <div className={styles.muted}>Identity • Layout • UI</div>
                   </div>
@@ -519,6 +519,137 @@ export default function PortfolioSite() {
               </motion.div>
             ))}
           </div>
+        </section>
+
+        {/* ABOUT */}
+        <section id="about" className={styles.section}>
+          <div className={styles.workTop}>
+            <div>
+              <h2 className={styles.h2}>About</h2>
+            </div>
+          </div>
+
+          <div className={styles.aboutGrid}>
+            <div className={styles.aboutText}>
+              <p className={styles.aboutParagraph}>
+                A short, scannable story. Details in case studies.
+              </p>
+            </div>
+
+            <div className={styles.aboutCard}>
+              <div className={styles.aboutCardInner}>
+                <p className={styles.aboutParagraph}>
+                  I build design systems that make brands feel consistent
+                  wherever they show up — packaging, editorial layouts, social
+                  templates, and product UI. My work balances craft and
+                  constraints so teams can move fast without losing quality.
+                </p>
+                <div className={styles.aboutCols}>
+                  <div className={styles.aboutMiniCard}>
+                    <div className={styles.smallTitle}>Strengths</div>
+                    <ul className={styles.list}>
+                      <li>Typography + hierarchy</li>
+                      <li>Grid + spacing systems</li>
+                      <li>Identity rollouts</li>
+                    </ul>
+                  </div>
+
+                  <div className={styles.aboutMiniCard}>
+                    <div className={styles.smallTitle}>Values</div>
+                    <ul className={styles.list}>
+                      <li>Clarity over clever</li>
+                      <li>Accessible by default</li>
+                      <li>Systems that scale</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SERVICES */}
+        <section id="services" className={styles.section}>
+          <div className={styles.workTop}>
+            <div>
+              <h2 className={styles.h2}>Services</h2>
+              <p className={styles.subtle}>
+                Simple menu, clear outcomes, and fast ways to reach you.
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.servicesGrid}>
+            {[
+              {
+                title: 'Brand identity',
+                desc: 'Logos, typography, palettes, and templates designed as a system.',
+                bullets: ['Identity kit', 'Guidelines', 'Templates'],
+              },
+              {
+                title: 'Editorial + print',
+                desc: 'Grid-driven layouts for magazines, reports, and campaigns.',
+                bullets: [
+                  'Layout system',
+                  'Production-ready files',
+                  'Style sheets',
+                ],
+              },
+              {
+                title: 'UI + design systems',
+                desc: 'Components, tokens, and documentation to support product teams.',
+                bullets: ['Token setup', 'Components', 'Handoff'],
+              },
+            ].map((s) => (
+              <Card key={s.title} className={styles.serviceCard}>
+                <CardHeader>
+                  <CardTitle>{s.title}</CardTitle>
+                  <p className={styles.muted} style={{ margin: '8px 0 0 0' }}>
+                    {s.desc}
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  <ul className={styles.list}>
+                    {s.bullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* CONTACT */}
+        <section id="contact" className={styles.section}>
+          <Card className={styles.contactCard}>
+            <CardContent>
+              <div className={styles.contactInner}>
+                <div>
+                  <h2 className={styles.h2}>Let’s build something clean.</h2>
+                  <p className={styles.subtle}>
+                    Email me a brief, timeline, and any references. I’ll reply
+                    with a plan and an estimate.
+                  </p>
+                </div>
+
+                <div className={styles.contactActions}>
+                  <Button asChild>
+                    <a href={`mailto:${PROFILE.email}`}>
+                      <Mail size={16} className={styles.iconLeft} />
+                      Email
+                    </a>
+                  </Button>
+                  <Button asChild variant="secondary">
+                    <a href={PROFILE.resumeHref}>
+                      <Download size={16} className={styles.iconLeft} />
+                      Resume
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </section>
 
         <footer className={styles.footer}>

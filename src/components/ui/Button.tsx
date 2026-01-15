@@ -15,8 +15,10 @@ export function Button({
 }: ButtonProps) {
   const cls = `${styles.button} ${styles[variant]} ${className}`
 
-  if (asChild) {
-    return <span className={cls}>{children}</span>
+  if (asChild && React.isValidElement(children)) {
+    return React.cloneElement(children as React.ReactElement<any>, {
+      className: `${cls} ${(children as any).props?.className ?? ''}`.trim(),
+    })
   }
 
   return (
