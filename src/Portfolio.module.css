@@ -33,6 +33,7 @@ body {
 
 .page {
   min-height: 100vh;
+  color: var(--text);
 }
 
 .container {
@@ -385,6 +386,8 @@ body {
   background: transparent;
   text-align: left;
   cursor: pointer;
+  color: var(--text);
+  font: inherit;
 }
 .projectButton:focus {
   outline: none;
@@ -478,4 +481,16 @@ body {
   display: flex;
   justify-content: flex-end;
   padding-top: 8px;
+}
+
+a {
+  color: white;
+}
+.page h1,
+.page h2,
+.page h3,
+.page h4,
+.page h5,
+.page h6 {
+  color: inherit;
 }

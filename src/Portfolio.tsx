@@ -105,6 +105,104 @@ const PROJECTS: Project[] = [
       },
     ],
   },
+
+  {
+    id: 'rs',
+    title: 'RS',
+    year: '2025',
+    category: 'Branding',
+    tags: ['Identity', 'Packaging', 'Art Direction'],
+    summary:
+      'A modern coffee brand built around a modular logotype and bold color system designed for high shelf impact.',
+    role: 'Lead Designer',
+    tools: ['Illustrator', 'InDesign', 'Figma'],
+    coverAlt: 'Cobalt Roastery brand identity mockups',
+    links: [
+      { label: 'Live site', href: '#' },
+      { label: 'Case study PDF', href: '#' },
+    ],
+    highlights: [
+      'Created a flexible identity system with 12 modular lockups.',
+      'Reduced label SKUs by 30% through a standardized template.',
+      'Improved in-store recognition with consistent shelf-blocking.',
+    ],
+    process: [
+      {
+        label: 'Challenge',
+        content:
+          'Unify multiple product lines under one brand while keeping room for seasonal releases.',
+      },
+      {
+        label: 'Approach',
+        content:
+          'Designed a modular system: core mark + variable descriptor, supported by a high-contrast palette and typographic hierarchy.',
+      },
+      {
+        label: 'Outcome',
+        content:
+          'A cohesive brand kit that works across packaging, signage, and digital templates for quick rollout.',
+      },
+    ],
+    gallery: [
+      {
+        label: '/images/project/cover.jpg',
+        alt: 'Coffee packaging on a table',
+      },
+      {
+        label: '/images/project/counter.jpg',
+        alt: 'Coffee shop counter scene',
+      },
+    ],
+  },
+
+  {
+    id: 'bb',
+    title: 'BB',
+    year: '2025',
+    category: 'Branding',
+    tags: ['Identity', 'Packaging', 'Art Direction'],
+    summary:
+      'A modern coffee brand built around a modular logotype and bold color system designed for high shelf impact.',
+    role: 'Lead Designer',
+    tools: ['Illustrator', 'InDesign', 'Figma'],
+    coverAlt: 'Cobalt Roastery brand identity mockups',
+    links: [
+      { label: 'Live site', href: '#' },
+      { label: 'Case study PDF', href: '#' },
+    ],
+    highlights: [
+      'Created a flexible identity system with 12 modular lockups.',
+      'Reduced label SKUs by 30% through a standardized template.',
+      'Improved in-store recognition with consistent shelf-blocking.',
+    ],
+    process: [
+      {
+        label: 'Challenge',
+        content:
+          'Unify multiple product lines under one brand while keeping room for seasonal releases.',
+      },
+      {
+        label: 'Approach',
+        content:
+          'Designed a modular system: core mark + variable descriptor, supported by a high-contrast palette and typographic hierarchy.',
+      },
+      {
+        label: 'Outcome',
+        content:
+          'A cohesive brand kit that works across packaging, signage, and digital templates for quick rollout.',
+      },
+    ],
+    gallery: [
+      {
+        label: '/images/project/cover.jpg',
+        alt: 'Coffee packaging on a table',
+      },
+      {
+        label: '/images/project/counter.jpg',
+        alt: 'Coffee shop counter scene',
+      },
+    ],
+  },
 ]
 
 const NAV = [
