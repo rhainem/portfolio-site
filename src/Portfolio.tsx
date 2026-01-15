@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './components/ui/Card'
 import { Badge } from './components/ui/Badge'
 import {
   Dialog,
+  DialogBody,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -110,7 +111,7 @@ const PROJECTS: Project[] = [
     id: 'rs',
     title: 'RS',
     year: '2025',
-    category: 'Branding',
+    category: 'Digital',
     tags: ['Identity', 'Packaging', 'Art Direction'],
     summary:
       'A modern coffee brand built around a modular logotype and bold color system designed for high shelf impact.',
@@ -521,7 +522,7 @@ export default function PortfolioSite() {
         </section>
 
         <footer className={styles.footer}>
-          © {new Date().getFullYear()} {PROFILE.name}.
+          © {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
         </footer>
       </main>
 
@@ -531,26 +532,26 @@ export default function PortfolioSite() {
       >
         <DialogContent>
           {active && (
-            <div className={styles.dialogInner}>
+            <div>
               <div className={styles.dialogHero}>
                 <img
                   src={
-                    (active.gallery?.[0]?.label ||
-                      'https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1600&q=80') as string
+                    (active.gallery?.[0]?.label ??
+                      '/images/placeholder.jpg') as string
                   }
                   alt={active.coverAlt}
                   className={styles.dialogHeroImg}
                 />
               </div>
 
-              <div className={styles.dialogBody}>
-                <DialogHeader>
-                  <DialogTitle>{active.title}</DialogTitle>
-                  <DialogDescription>
-                    {active.category} • {active.year} • {active.role}
-                  </DialogDescription>
-                </DialogHeader>
+              <DialogHeader>
+                <DialogTitle>{active.title}</DialogTitle>
+                <DialogDescription>
+                  {active.category} • {active.year} • {active.role}
+                </DialogDescription>
+              </DialogHeader>
 
+              <DialogBody>
                 <div className={styles.badgeRow}>
                   {active.tags.map((t) => (
                     <Badge key={t}>{t}</Badge>
@@ -562,7 +563,7 @@ export default function PortfolioSite() {
                 <div className={styles.dialogActions}>
                   <Button onClick={() => setOpenId(null)}>Close</Button>
                 </div>
-              </div>
+              </DialogBody>
             </div>
           )}
         </DialogContent>
