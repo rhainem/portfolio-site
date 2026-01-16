@@ -144,3 +144,15 @@
   color: var(--muted);
   line-height: 1.6;
 }
+
+.dialogGallery {
+  display: grid;
+  gap: 16px;
+}
+
+.dialogImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}

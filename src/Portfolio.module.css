@@ -733,3 +733,15 @@ section[id] {
   font-size: 12px;
   color: var(--muted);
 }
+
+.dialogGallery {
+  display: grid;
+  gap: 16px;
+}
+
+.dialogImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}

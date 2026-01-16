@@ -42,7 +42,6 @@ type Project = {
   links?: { label: string; href: string }[]
   highlights: string[]
   process: { label: string; content: string }[]
-  gallery?: { label: string; alt: string }[]
 }
 
 const PROFILE = {
@@ -68,7 +67,6 @@ const PROJECTS: Project[] = [
       'A modern coffee brand built around a modular logotype and bold color system designed for high shelf impact.',
     role: 'Lead Designer',
     tools: ['Illustrator', 'InDesign', 'Figma'],
-    coverAlt: 'Cobalt Roastery brand identity mockups',
     links: [
       { label: 'Live site', href: '#' },
       { label: 'Case study PDF', href: '#' },
@@ -95,16 +93,8 @@ const PROJECTS: Project[] = [
           'A cohesive brand kit that works across packaging, signage, and digital templates for quick rollout.',
       },
     ],
-    gallery: [
-      {
-        label: '/images/project/cover.jpg',
-        alt: 'Coffee packaging on a table',
-      },
-      {
-        label: '/images/project/counter.jpg',
-        alt: 'Coffee shop counter scene',
-      },
-    ],
+    coverAlt: 'Cobalt Roastery brand identity mockups',
+    imageCount: 2,
   },
 
   {
@@ -112,48 +102,14 @@ const PROJECTS: Project[] = [
     title: 'RS',
     year: '2025',
     category: 'Digital',
-    tags: ['Identity', 'Packaging', 'Art Direction'],
+    tags: ['Identity', 'UI', 'Design System'],
     summary:
-      'A modern coffee brand built around a modular logotype and bold color system designed for high shelf impact.',
+      'A digital-first identity system designed for clarity, consistency, and scale.',
     role: 'Lead Designer',
-    tools: ['Illustrator', 'InDesign', 'Figma'],
-    coverAlt: 'Cobalt Roastery brand identity mockups',
-    links: [
-      { label: 'Live site', href: '#' },
-      { label: 'Case study PDF', href: '#' },
-    ],
-    highlights: [
-      'Created a flexible identity system with 12 modular lockups.',
-      'Reduced label SKUs by 30% through a standardized template.',
-      'Improved in-store recognition with consistent shelf-blocking.',
-    ],
-    process: [
-      {
-        label: 'Challenge',
-        content:
-          'Unify multiple product lines under one brand while keeping room for seasonal releases.',
-      },
-      {
-        label: 'Approach',
-        content:
-          'Designed a modular system: core mark + variable descriptor, supported by a high-contrast palette and typographic hierarchy.',
-      },
-      {
-        label: 'Outcome',
-        content:
-          'A cohesive brand kit that works across packaging, signage, and digital templates for quick rollout.',
-      },
-    ],
-    gallery: [
-      {
-        label: '/images/project/cover.jpg',
-        alt: 'Coffee packaging on a table',
-      },
-      {
-        label: '/images/project/counter.jpg',
-        alt: 'Coffee shop counter scene',
-      },
-    ],
+    tools: ['Figma', 'Illustrator'],
+    coverAlt: 'RS digital identity cover',
+    highlights: [],
+    process: [],
   },
 
   {
@@ -166,7 +122,6 @@ const PROJECTS: Project[] = [
       'A modern coffee brand built around a modular logotype and bold color system designed for high shelf impact.',
     role: 'Lead Designer',
     tools: ['Illustrator', 'InDesign', 'Figma'],
-    coverAlt: 'Cobalt Roastery brand identity mockups',
     links: [
       { label: 'Live site', href: '#' },
       { label: 'Case study PDF', href: '#' },
@@ -193,16 +148,8 @@ const PROJECTS: Project[] = [
           'A cohesive brand kit that works across packaging, signage, and digital templates for quick rollout.',
       },
     ],
-    gallery: [
-      {
-        label: '/images/project/cover.jpg',
-        alt: 'Coffee packaging on a table',
-      },
-      {
-        label: '/images/project/counter.jpg',
-        alt: 'Coffee shop counter scene',
-      },
-    ],
+    coverAlt: 'BB brand identity mockups',
+    imageCount: 2,
   },
 ]
 
@@ -230,6 +177,17 @@ function getCategoryOrder(cat: Project['category']) {
     Other: 5,
   }
   return order[cat] ?? 99
+}
+
+function projectCover(slug: string) {
+  return `/images/projects/${slug}/cover.jpg`
+}
+
+function projectImages(slug: string) {
+  return [
+    `/images/projects/${slug}/image-1.jpg`,
+    `/images/projects/${slug}/image-2.jpg`,
+  ]
 }
 
 export default function PortfolioSite() {
@@ -482,14 +440,12 @@ export default function PortfolioSite() {
                   >
                     <div className={styles.thumb}>
                       <img
-                        src={
-                          (p.gallery?.[0]?.label ??
-                            '/images/placeholder.jpg') as string
-                        }
+                        src={projectCover(p.id)}
                         alt={p.coverAlt}
                         className={styles.thumbImg}
                         loading="lazy"
                       />
+
                       <div className={styles.thumbLabel}>
                         {p.category} • {p.year}
                       </div>
@@ -663,13 +619,10 @@ export default function PortfolioSite() {
       >
         <DialogContent>
           {active && (
-            <div>
+            <>
               <div className={styles.dialogHero}>
                 <img
-                  src={
-                    (active.gallery?.[0]?.label ??
-                      '/images/placeholder.jpg') as string
-                  }
+                  src={projectCover(active.id)}
                   alt={active.coverAlt}
                   className={styles.dialogHeroImg}
                 />
@@ -683,9 +636,15 @@ export default function PortfolioSite() {
               </DialogHeader>
 
               <DialogBody>
-                <div className={styles.badgeRow}>
-                  {active.tags.map((t) => (
-                    <Badge key={t}>{t}</Badge>
+                <div className={styles.dialogGallery}>
+                  {projectImages(active.id).map((src, i) => (
+                    <img
+                      key={src}
+                      src={src}
+                      alt={`${active.title} image ${i + 1}`}
+                      className={styles.dialogImage}
+                      loading="lazy"
+                    />
                   ))}
                 </div>
 
@@ -695,7 +654,7 @@ export default function PortfolioSite() {
                   <Button onClick={() => setOpenId(null)}>Close</Button>
                 </div>
               </DialogBody>
-            </div>
+            </>
           )}
         </DialogContent>
       </Dialog>
