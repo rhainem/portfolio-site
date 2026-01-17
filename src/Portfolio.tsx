@@ -80,7 +80,26 @@ export default function PortfolioSite() {
     [openId]
   )
 
-  const images = active?.images ?? []
+  const media =
+    active?.media ??
+    (active?.images ?? []).map((src, idx) => ({
+      id: `${active?.id ?? 'project'}-legacy-${idx}`,
+      kind: src.toLowerCase().endsWith('.mp4') ? 'video' : 'image',
+      group: 'Other' as const,
+      src,
+    }))
+
+  const grouped = useMemo(() => {
+    const groups = new Map<string, typeof media>()
+    for (const item of media) {
+      const key = item.group
+      const current = groups.get(key) ?? []
+      current.push(item)
+      groups.set(key, current)
+    }
+    return Array.from(groups.entries())
+  }, [media])
+
   const hasTools = (active?.tools?.length ?? 0) > 0
   const hasHighlights = (active?.highlights?.length ?? 0) > 0
   const hasProcess = (active?.process?.length ?? 0) > 0
@@ -484,35 +503,41 @@ export default function PortfolioSite() {
               </DialogHeader>
 
               <DialogBody>
-                {images.length > 0 ? (
-                  <div className={ui.dialogGallery}>
-                    {images.map((src, i) => {
-                      const isVideo = src.toLowerCase().endsWith('.mp4')
+                {media.length > 0 ? (
+                  <>
+                    {grouped.map(([group, items]) => (
+                      <section key={group} className={ui.dialogSection}>
+                        <div className={ui.dialogSectionTitle}>{group}</div>
 
-                      return isVideo ? (
-                        <video
-                          key={src}
-                          className={ui.dialogImage}
-                          controls
-                          preload="metadata"
-                        >
-                          <source src={src} type="video/mp4" />
-                        </video>
-                      ) : (
-                        <img
-                          key={src}
-                          src={src}
-                          alt={`${active.title} media ${i + 1}`}
-                          className={ui.dialogImage}
-                          loading="lazy"
-                        />
-                      )
-                    })}
-                  </div>
+                        <div className={ui.dialogGallery}>
+                          {items.map((m) =>
+                            m.kind === 'video' ? (
+                              <video
+                                key={m.id}
+                                className={ui.dialogImage}
+                                controls
+                                preload="metadata"
+                              >
+                                <source src={m.src} type="video/mp4" />
+                              </video>
+                            ) : (
+                              <img
+                                key={m.id}
+                                src={m.src}
+                                alt={m.alt ?? ''}
+                                className={ui.dialogImage}
+                                loading="lazy"
+                              />
+                            )
+                          )}
+                        </div>
+                      </section>
+                    ))}
+                  </>
                 ) : (
                   <div className={ui.dialogEmpty}>
                     <p className={ui.muted}>
-                      No images available for this project.
+                      No media available for this project.
                     </p>
                   </div>
                 )}

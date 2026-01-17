@@ -64,6 +64,30 @@ export const PROJECTS: Project[] = [
       '/images/projects/a/image-7.jpg',
       '/images/projects/a/image-8.jpg',
     ],
+    media: [
+      {
+        id: 'a-hero',
+        kind: 'image',
+        group: 'Hero',
+        src: '/images/projects/a/cover.jpg',
+        alt: 'Tail project hero',
+        aspect: 'wide',
+      },
+      {
+        id: 'a-social-1',
+        kind: 'image',
+        group: 'Social',
+        src: '/images/projects/a/image-1.jpg',
+        aspect: 'portrait',
+      },
+      {
+        id: 'a-motion-1',
+        kind: 'video',
+        group: 'Motion',
+        src: '/images/projects/a/video-1.mp4',
+        aspect: 'wide',
+      },
+    ],
   },
 
   {

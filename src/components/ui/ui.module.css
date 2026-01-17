@@ -245,6 +245,22 @@
   background: var(--bg);
 }
 
+.mediaWide {
+  max-height: 420px;
+  object-fit: contain;
+}
+
+.mediaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.mediaMasonry {
+  column-count: 2;
+  column-gap: 12px;
+}
+
 .dialogEmpty {
   padding: 12px 0;
 }

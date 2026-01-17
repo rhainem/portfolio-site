@@ -20,6 +20,7 @@ export type Project = {
   highlights: string[]
   process: { label: string; content: string }[]
   images?: string[]
+  media?: ProjectMediaItem[]
 }
 
 export type SortKey = 'featured' | 'newest' | 'category'
@@ -38,4 +39,25 @@ export type Profile = {
   availability: string
   socials: { label: string; href: string }[]
   resumeHref: string
+}
+
+export type MediaKind = 'image' | 'video'
+
+export type MediaGroup =
+  | 'Hero'
+  | 'Web'
+  | 'Social'
+  | 'Ads'
+  | 'EDM'
+  | 'Photography'
+  | 'Motion'
+  | 'Other'
+
+export type ProjectMediaItem = {
+  id: string
+  kind: MediaKind
+  group: MediaGroup
+  src: string
+  alt?: string
+  aspect?: 'wide' | 'square' | 'portrait' | 'auto'
 }
