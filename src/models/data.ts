@@ -1,7 +1,7 @@
 import type { Project, Profile, NavItem } from './types'
 
 export const PROFILE: Profile = {
-  name: 'Name',
+  name: 'Rhaine',
   title: 'Graphic Designer',
   location: 'Auckland, NZ',
   tagline:
@@ -69,7 +69,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'b',
     title: 'RS',
-    year: '2025',
+    year: '2018-2024',
     category: 'Digital',
     tags: ['Identity', 'UI', 'Design System'],
     summary:
@@ -92,11 +92,11 @@ export const PROJECTS: Project[] = [
   {
     id: 'c',
     title: 'BB',
-    year: '2025',
+    year: '2018-2024',
     category: 'Branding',
     tags: ['Identity', 'Packaging', 'Art Direction'],
     summary:
-      'A modern coffee brand built around a modular logotype and bold color system designed for high shelf impact.',
+      'A classical music brand built around a modular logotype and bold color system designed for high shelf impact.',
     role: 'Lead Designer',
     tools: ['Illustrator', 'InDesign', 'Figma'],
     links: [

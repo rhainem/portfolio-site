@@ -21,7 +21,6 @@ import {
   MapPin,
   Search,
 } from 'lucide-react'
-import styles from './Portfolio.module.css'
 import {
   PROFILE,
   PROJECTS,
@@ -31,6 +30,8 @@ import {
   projectCover,
 } from './models'
 import type { SortKey, Project } from './models'
+import styles from './Portfolio.module.css'
+import ui from './components/ui/ui.module.css'
 
 export default function PortfolioSite() {
   const reduceMotion = useReducedMotion()
@@ -80,6 +81,9 @@ export default function PortfolioSite() {
   )
 
   const images = active?.images ?? []
+  const hasTools = (active?.tools?.length ?? 0) > 0
+  const hasHighlights = (active?.highlights?.length ?? 0) > 0
+  const hasProcess = (active?.process?.length ?? 0) > 0
 
   const container = {
     hidden: { opacity: 0, y: 8 },
@@ -121,11 +125,11 @@ export default function PortfolioSite() {
           </nav>
 
           <div className={styles.headerActions}>
-            <Button asChild variant="secondary" className={styles.hideOnMobile}>
+            {/* <Button asChild variant="secondary" className={styles.hideOnMobile}>
               <a href={PROFILE.resumeHref} aria-label="Download resume">
                 <Download size={16} className={styles.iconLeft} /> Resume
               </a>
-            </Button>
+            </Button> */}
             <Button asChild>
               <a href={`mailto:${PROFILE.email}`}>
                 <Mail size={16} className={styles.iconLeft} /> Contact
@@ -154,9 +158,9 @@ export default function PortfolioSite() {
               <h1 className={styles.h1}>{PROFILE.tagline}</h1>
 
               <p className={styles.lead}>
-                I’m {PROFILE.name} — {PROFILE.title}. I help teams and founders
-                turn complex ideas into clean systems: brand identity, editorial
-                design, and UI.
+                I’m {PROFILE.name}, a {PROFILE.title} based in Auckland. I help
+                teams and founders turn complex ideas into clean systems: brand
+                identity, editorial design, and UI.
               </p>
 
               <div className={styles.badgeRow}>
@@ -440,12 +444,12 @@ export default function PortfolioSite() {
                       Email
                     </a>
                   </Button>
-                  <Button asChild variant="secondary">
+                  {/* <Button asChild variant="secondary">
                     <a href={PROFILE.resumeHref}>
                       <Download size={16} className={styles.iconLeft} />
                       Resume
                     </a>
-                  </Button>
+                  </Button> */}
                 </div>
               </div>
             </CardContent>
@@ -464,11 +468,11 @@ export default function PortfolioSite() {
         <DialogContent>
           {active && (
             <>
-              <div className={styles.dialogHero}>
+              <div className={ui.dialogHero}>
                 <img
                   src={projectCover(active.id)}
                   alt={active.coverAlt}
-                  className={styles.dialogHeroImg}
+                  className={ui.dialogHeroImg}
                 />
               </div>
 
@@ -481,28 +485,93 @@ export default function PortfolioSite() {
 
               <DialogBody>
                 {images.length > 0 ? (
-                  <div className={styles.dialogGallery}>
-                    {images.map((src, i) => (
-                      <img
-                        key={src}
-                        src={src}
-                        alt={`${active.title} image ${i + 1}`}
-                        className={styles.dialogImage}
-                        loading="lazy"
-                      />
-                    ))}
+                  <div className={ui.dialogGallery}>
+                    {images.map((src, i) => {
+                      const isVideo = src.toLowerCase().endsWith('.mp4')
+
+                      return isVideo ? (
+                        <video
+                          key={src}
+                          className={ui.dialogImage}
+                          controls
+                          preload="metadata"
+                        >
+                          <source src={src} type="video/mp4" />
+                        </video>
+                      ) : (
+                        <img
+                          key={src}
+                          src={src}
+                          alt={`${active.title} media ${i + 1}`}
+                          className={ui.dialogImage}
+                          loading="lazy"
+                        />
+                      )
+                    })}
                   </div>
                 ) : (
-                  <div className={styles.dialogEmpty}>
-                    <p className={styles.muted}>
+                  <div className={ui.dialogEmpty}>
+                    <p className={ui.muted}>
                       No images available for this project.
                     </p>
                   </div>
                 )}
 
-                <p className={styles.dialogSummary}>{active.summary}</p>
+                <p className={ui.dialogSummary}>{active.summary}</p>
 
-                <div className={styles.dialogActions}>
+                {hasTools && (
+                  <>
+                    <Separator />
+                    <div className={styles.stackSm}>
+                      <div className={styles.smallTitle}>Tools</div>
+                      <div className={styles.badgeRow}>
+                        {active.tools.map((tool) => (
+                          <Badge key={tool}>{tool}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {hasHighlights && (
+                  <>
+                    <Separator />
+                    <div className={styles.stackSm}>
+                      <div className={styles.smallTitle}>Highlights</div>
+                      <ul className={styles.list}>
+                        {active.highlights.map((h) => (
+                          <li key={h}>{h}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
+                )}
+
+                {hasProcess && (
+                  <>
+                    <Separator />
+                    <div className={styles.stackSm}>
+                      <div className={styles.smallTitle}>Process</div>
+                      <div className={styles.stackSm}>
+                        {active.process.map((step) => (
+                          <div
+                            key={step.label}
+                            className={ui.dialogProcessItem}
+                          >
+                            <div className={ui.dialogProcessLabel}>
+                              {step.label}
+                            </div>
+                            <p className={ui.dialogProcessContent}>
+                              {step.content}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                <div className={ui.dialogActions}>
                   <Button onClick={() => setOpenId(null)}>Close</Button>
                 </div>
               </DialogBody>
