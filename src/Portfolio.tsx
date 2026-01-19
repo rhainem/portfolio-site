@@ -32,6 +32,7 @@ import {
 import type { SortKey, Project } from './models'
 import styles from './Portfolio.module.css'
 import ui from './components/ui/ui.module.css'
+import { ProjectMediaItem } from './models/types'
 
 export default function PortfolioSite() {
   const reduceMotion = useReducedMotion()
@@ -68,7 +69,7 @@ export default function PortfolioSite() {
       list = [...list].sort(
         (a, b) =>
           getCategoryOrder(a.category) - getCategoryOrder(b.category) ||
-          a.title.localeCompare(b.title)
+          a.title.localeCompare(b.title),
       )
     }
 
@@ -77,17 +78,29 @@ export default function PortfolioSite() {
 
   const active = useMemo(
     () => PROJECTS.find((p) => p.id === openId) ?? null,
-    [openId]
+    [openId],
   )
 
-  const media =
-    active?.media ??
-    (active?.images ?? []).map((src, idx) => ({
-      id: `${active?.id ?? 'project'}-legacy-${idx}`,
-      kind: src.toLowerCase().endsWith('.mp4') ? 'video' : 'image',
-      group: 'Other' as const,
-      src,
-    }))
+  const media = useMemo(() => {
+    if (!active) return []
+
+    const fromMedia = active.media ?? []
+    const legacy = active.images ?? []
+
+    // Build a set of srcs already used in media (so we don't duplicate)
+    const used = new Set(fromMedia.map((m) => m.src))
+
+    const legacyAsOther = legacy
+      .filter((src) => !used.has(src))
+      .map((src, idx) => ({
+        id: `${active.id}-legacy-${idx}`,
+        kind: src.toLowerCase().endsWith('.mp4') ? 'video' : 'image',
+        group: 'Other' as const,
+        src,
+      }))
+
+    return [...fromMedia, ...legacyAsOther]
+  }, [active])
 
   const grouped = useMemo(() => {
     const groups = new Map<string, typeof media>()
@@ -99,6 +112,53 @@ export default function PortfolioSite() {
     }
     return Array.from(groups.entries())
   }, [media])
+
+  const aspectClass = (
+    a?: 'ultrawide' | 'banner' | 'wide' | 'square' | 'portrait' | 'auto',
+  ) => {
+    switch (a) {
+      case 'ultrawide':
+        return ui.aspectUltrawide
+      case 'banner':
+        return ui.aspectBanner
+      case 'wide':
+        return ui.aspectWide
+      case 'square':
+        return ui.aspectSquare
+      case 'portrait':
+        return ui.aspectPortrait
+      default:
+        return ui.aspectAuto
+    }
+  }
+
+  const aspectForGroup = (group: string) => {
+    switch (group) {
+      case 'Hero':
+      case 'Web':
+      case 'Preview':
+        return 'wide'
+      case 'Social':
+      case 'Ads':
+        return 'square'
+      case 'EDM':
+      case 'Photography':
+        return 'portrait'
+      default:
+        return 'auto'
+    }
+  }
+
+  const galleryClassForGroup = (group: string) => {
+    switch (group) {
+      case 'Web':
+        return ui.galleryOneCol
+      case 'Social':
+        return ui.galleryThreeCol
+      default:
+        return ui.galleryTwoCol
+    }
+  }
 
   const hasTools = (active?.tools?.length ?? 0) > 0
   const hasHighlights = (active?.highlights?.length ?? 0) > 0
@@ -509,12 +569,16 @@ export default function PortfolioSite() {
                       <section key={group} className={ui.dialogSection}>
                         <div className={ui.dialogSectionTitle}>{group}</div>
 
-                        <div className={ui.dialogGallery}>
-                          {items.map((m) =>
-                            m.kind === 'video' ? (
+                        <div
+                          className={`${ui.dialogGallery} ${galleryClassForGroup(group)}`}
+                        >
+                          {items.map((m) => {
+                            const aspect = m.aspect ?? aspectForGroup(m.group)
+
+                            return m.kind === 'video' ? (
                               <video
                                 key={m.id}
-                                className={ui.dialogImage}
+                                className={`${ui.dialogMedia} ${aspectClass(aspect)}`}
                                 controls
                                 preload="metadata"
                               >
@@ -525,11 +589,11 @@ export default function PortfolioSite() {
                                 key={m.id}
                                 src={m.src}
                                 alt={m.alt ?? ''}
-                                className={ui.dialogImage}
+                                className={`${ui.dialogMedia} ${aspectClass(aspect)}`}
                                 loading="lazy"
                               />
                             )
-                          )}
+                          })}
                         </div>
                       </section>
                     ))}

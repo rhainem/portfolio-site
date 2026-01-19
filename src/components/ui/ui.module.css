@@ -11,7 +11,9 @@
   font-weight: 400;
   font-size: var(--text-sm);
   cursor: pointer;
-  transition: background 150ms ease, transform 60ms ease,
+  transition:
+    background 150ms ease,
+    transform 60ms ease,
     border-color 150ms ease;
 }
 
@@ -101,7 +103,7 @@
   position: fixed;
   inset: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: 18px;
   background: rgba(11, 12, 16, 0.75);
@@ -123,6 +125,7 @@
   max-height: 90vh;
   overflow: auto;
   text-align: left;
+  margin-top: 32px; /* or 24px */
 }
 
 .dialogHeader {
@@ -308,5 +311,83 @@
     grid-template-columns: 1fr;
     row-gap: 6px;
     align-items: start;
+  }
+}
+
+.dialogGallery {
+  display: grid;
+  gap: 12px;
+}
+
+.galleryOneCol {
+  grid-template-columns: 1fr;
+}
+
+.galleryTwoCol {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.galleryThreeCol {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dialogMedia {
+  width: 100%;
+  display: block;
+  border-radius: 16px;
+  background: var(--bg);
+  object-fit: cover;
+}
+
+/* .dialogMedia {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  object-fit: contain;
+  background: var(--bg);
+} */
+
+.aspectUltrawide {
+  aspect-ratio: auto;
+  object-fit: contain;
+  max-height: 360px;
+}
+
+.aspectBanner {
+  aspect-ratio: auto;
+  object-fit: contain;
+  max-height: 200px;
+}
+
+.aspectWide {
+  aspect-ratio: 16 / 9;
+}
+
+.aspectSquare {
+  aspect-ratio: 1 / 1;
+}
+
+.aspectPortrait {
+  aspect-ratio: 4 / 5;
+}
+
+.aspectAuto {
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.dialogPanel {
+  animation: dialogEnter 200ms ease-out;
+}
+
+@keyframes dialogEnter {
+  from {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

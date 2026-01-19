@@ -5,7 +5,7 @@ function getFocusable(root: HTMLElement) {
   const selector =
     'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
   return Array.from(root.querySelectorAll<HTMLElement>(selector)).filter(
-    (el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden')
+    (el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'),
   )
 }
 
@@ -74,6 +74,9 @@ export function DialogContent({
   useEffect(() => {
     const panel = panelRef.current
     if (!panel) return
+
+    // ✅ ensure dialog always opens at the top
+    panel.scrollTop = 0
 
     // Focus the first focusable element, else focus panel itself
     const focusables = getFocusable(panel)

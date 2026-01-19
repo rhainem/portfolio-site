@@ -7,7 +7,7 @@
   --ring: rgba(0, 0, 0, 0.3);
   --shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 
-  /* Existing radius tokens */
+  /* Radius tokens */
   --r-xl: 24px;
   --r-lg: 18px;
   --r-md: 16px;
@@ -17,7 +17,7 @@
   --radius-lg: var(--r-lg);
   --radius-md: var(--r-md);
 
-  /* Optional: type scale aliases (keeps it consistent everywhere) */
+  /* Type scale aliases */
   --text-xs: 12px;
   --text-sm: 13px;
   --text-md: 16px;
@@ -42,7 +42,7 @@
   --chip-pad-y: 8px;
   --chip-pad-x: 12px;
 
-  /* Optional: smaller chip variant (for LinkedIn) */
+  /* Smaller chip variant for scoial links */
   --chip-sm-pad-y: 7px;
   --chip-sm-pad-x: 10px;
   --chip-sm-font: 12px;
@@ -67,8 +67,14 @@ html {
 
 body {
   margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-    Helvetica, Arial;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial;
   /* background: radial-gradient(
       1200px 900px at 15% 0%,
       rgba(255, 255, 255, 0.08),
@@ -85,7 +91,7 @@ body {
   color: var(--text);
 }
 
-/* Continuous bottom vignette (prevents hard seam near footer) */
+/* Continuous bottom vignette */
 .page::after {
   content: '';
   position: fixed;
@@ -559,7 +565,6 @@ a {
   font-size: var(--text-xs);
 }
 
-/* Ensure headings inherit page color */
 .page h1,
 .page h2,
 .page h3,

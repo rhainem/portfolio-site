@@ -44,13 +44,14 @@ export type Profile = {
 export type MediaKind = 'image' | 'video'
 
 export type MediaGroup =
-  | 'Hero'
+  | 'Heroes'
   | 'Web'
-  | 'Social'
-  | 'Ads'
+  | 'Socials'
+  | 'Print'
+  | 'Social Media Ads'
   | 'EDM'
   | 'Photography'
-  | 'Motion'
+  | 'Preview'
   | 'Other'
 
 export type ProjectMediaItem = {
@@ -59,5 +60,5 @@ export type ProjectMediaItem = {
   group: MediaGroup
   src: string
   alt?: string
-  aspect?: 'wide' | 'square' | 'portrait' | 'auto'
+  aspect?: 'ultrawide' | 'banner' | 'wide' | 'square' | 'portrait' | 'auto'
 }
