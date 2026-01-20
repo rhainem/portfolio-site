@@ -144,12 +144,11 @@ export default function PortfolioSite() {
         return 'square'
       case 'Social Media Ads':
         return 'banner'
-      case 'EDM':
+      case 'EDMs':
         return 'viewport'
       case 'Print':
         return 'print'
       case 'Photography':
-      case 'Print':
         return 'portrait'
       default:
         return 'auto'
@@ -246,16 +245,18 @@ export default function PortfolioSite() {
               <h1 className={styles.h1}>{PROFILE.tagline}</h1>
 
               <p className={styles.lead}>
-                I’m {PROFILE.name}, a {PROFILE.title} based in Auckland. I help
-                teams and founders turn complex ideas into clean systems: brand
-                identity, editorial design, and UI.
+                I’m {PROFILE.name}, a {PROFILE.title} based in Auckland. I
+                support brands from concept through execution, delivering
+                cohesive identity, campaigns, print production, and digital
+                design across fast-moving environments.
               </p>
 
               <div className={styles.badgeRow}>
-                <Badge>Brand systems</Badge>
-                <Badge>Print + editorial</Badge>
-                <Badge>UI + design tokens</Badge>
                 <Badge>Art direction</Badge>
+                <Badge>Brand systems</Badge>
+                <Badge>Campaigns</Badge>
+                <Badge>Print + production</Badge>
+                <Badge>Web + digital</Badge>
               </div>
 
               <div className={styles.ctaRow}>
@@ -278,7 +279,10 @@ export default function PortfolioSite() {
                 <div className={styles.cardTight}>
                   <div className={styles.special}>
                     <div className={styles.smallTitle}>Specialties</div>
-                    <div className={styles.muted}>Identity • Layout • UI</div>
+                    <div className={styles.muted}>
+                      Art direction • Identity • EDM and paid ad campaigns •
+                      Digital • Web design • UI • Print
+                    </div>
                   </div>
                   <ExternalLink size={16} className={styles.mutedIcon} />
                 </div>
@@ -287,7 +291,7 @@ export default function PortfolioSite() {
                   <div>
                     <div className={styles.smallTitle}>Approach</div>
                     <div className={styles.muted}>
-                      Systems-first • Accessible
+                      Systems-first • Accessible • Built to scale
                     </div>
                   </div>
                   <ExternalLink size={16} className={styles.mutedIcon} />
@@ -312,7 +316,8 @@ export default function PortfolioSite() {
             <div>
               <h2 className={styles.h2}>Selected work</h2>
               <p className={styles.subtle}>
-                Clear previews, quick filtering, and expandable case studies.
+                Selected work delivered across fast-moving campaigns, print
+                production, and digital channels.
               </p>
             </div>
 
@@ -424,7 +429,27 @@ export default function PortfolioSite() {
           <div className={styles.aboutGrid}>
             <div className={styles.aboutText}>
               <p className={styles.aboutParagraph}>
-                A short, scannable story. Details in case studies.
+                I work across brand identity, campaigns, print production, and
+                digital design. I have experience supporting both in-house teams
+                and independent clients, delivering consistent, high-quality
+                work across fast-moving environments.
+                <br />
+                <br />
+              </p>
+              <p className={styles.aboutParagraph}>
+                My approach is systems-focused and detail-driven. I design with
+                scalability and consistency in mind, ensuring brands translate
+                clearly across channels such as social, EDMs, web, print, and
+                in-store or mailed collateral. I am comfortable managing
+                projects end to end, from concept through production and
+                delivery.
+                <br />
+                <br />
+              </p>
+              <p className={styles.aboutParagraph}>
+                I work closely with stakeholders, developers, marketers, and
+                suppliers to meet deadlines, maintain brand standards, and
+                deliver outcomes that support real business goals.
               </p>
             </div>
 
@@ -432,7 +457,7 @@ export default function PortfolioSite() {
               <div className={styles.aboutCardInner}>
                 <p className={styles.aboutParagraph}>
                   I build design systems that make brands feel consistent
-                  wherever they show up — packaging, editorial layouts, social
+                  wherever they show up; packaging, editorial layouts, social
                   templates, and product UI. My work balances craft and
                   constraints so teams can move fast without losing quality.
                 </p>
@@ -440,16 +465,16 @@ export default function PortfolioSite() {
                   <div className={styles.aboutMiniCard}>
                     <div className={styles.smallTitle}>Strengths</div>
                     <ul className={styles.list}>
+                      <li>Brand rollouts and templates</li>
                       <li>Typography + hierarchy</li>
                       <li>Grid + spacing systems</li>
-                      <li>Identity rollouts</li>
                     </ul>
                   </div>
 
                   <div className={styles.aboutMiniCard}>
                     <div className={styles.smallTitle}>Values</div>
                     <ul className={styles.list}>
-                      <li>Clarity over clever</li>
+                      <li>Consistency across channels</li>
                       <li>Accessible by default</li>
                       <li>Systems that scale</li>
                     </ul>
@@ -466,7 +491,9 @@ export default function PortfolioSite() {
             <div>
               <h2 className={styles.h2}>Services</h2>
               <p className={styles.subtle}>
-                Simple menu, clear outcomes, and fast ways to reach you.
+                End-to-end design support for established, growing, and new
+                brands, covering identity, campaigns, print production, and
+                digital execution.
               </p>
             </div>
           </div>
@@ -475,22 +502,48 @@ export default function PortfolioSite() {
             {[
               {
                 title: 'Brand identity',
-                desc: 'Logos, typography, palettes, and templates designed as a system.',
-                bullets: ['Identity kit', 'Guidelines', 'Templates'],
-              },
-              {
-                title: 'Editorial + print',
-                desc: 'Grid-driven layouts for magazines, reports, and campaigns.',
+                desc: 'Visual identities designed to stay consistent across print, digital, and campaigns.',
                 bullets: [
-                  'Layout system',
-                  'Production-ready files',
-                  'Style sheets',
+                  'Logos and identity systems',
+                  'Typography and colour systems',
+                  'Brand guidelines',
                 ],
               },
               {
-                title: 'UI + design systems',
-                desc: 'Components, tokens, and documentation to support product teams.',
-                bullets: ['Token setup', 'Components', 'Handoff'],
+                title: 'Marketing + campaigns',
+                desc: 'Creative support for always-on marketing and campaign rollouts.',
+                bullets: [
+                  'Meta ad creative',
+                  'EDM design and build',
+                  'Campaign asset rollouts',
+                ],
+              },
+              {
+                title: 'Editorial + print + POS',
+                desc: 'Print design built for production and real-world use.',
+                bullets: [
+                  'Catalogues and brochures',
+                  'Signage and POS',
+                  'Print-ready artwork',
+                ],
+              },
+              {
+                title: 'Web + digital design',
+                desc: 'Websites and digital assets designed for clarity, performance, and growth.',
+                bullets: [
+                  'Website design',
+                  'CMS-based builds',
+                  'Ongoing updates',
+                ],
+              },
+              {
+                title: 'Photography + content',
+                desc: 'Visual content to support campaigns, products, and events.',
+                bullets: [
+                  'Event photography',
+                  'Product photography',
+                  'Campaign assets',
+                ],
               },
             ].map((s) => (
               <Card key={s.title} className={styles.serviceCard}>
@@ -518,10 +571,12 @@ export default function PortfolioSite() {
             <CardContent>
               <div className={styles.contactInner}>
                 <div>
-                  <h2 className={styles.h2}>Let’s build something clean.</h2>
+                  <h2 className={styles.h2}>
+                    Let’s build something that scales.
+                  </h2>
                   <p className={styles.subtle}>
                     Email me a brief, timeline, and any references. I’ll reply
-                    with a plan and an estimate.
+                    with next steps.
                   </p>
                 </div>
 
@@ -545,7 +600,7 @@ export default function PortfolioSite() {
         </section>
 
         <footer className={styles.footer}>
-          © {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
+          © {new Date().getFullYear()} Built by {PROFILE.name}.
         </footer>
       </main>
 
@@ -583,10 +638,17 @@ export default function PortfolioSite() {
                         >
                           {items.map((m) => {
                             const aspect = m.aspect ?? aspectForGroup(m.group)
+                            const extraClass =
+                              m.kind === 'video' && m.group === 'Preview'
+                                ? ui.mediaFull
+                                : ''
 
                             if (aspect === 'viewport') {
                               return (
-                                <div key={m.id} className={ui.aspectViewport}>
+                                <div
+                                  key={m.id}
+                                  className={`${ui.aspectViewport} ${extraClass}`}
+                                >
                                   {m.kind === 'video' ? (
                                     <video
                                       className={ui.viewportMedia}
@@ -610,7 +672,7 @@ export default function PortfolioSite() {
                             return m.kind === 'video' ? (
                               <video
                                 key={m.id}
-                                className={`${ui.dialogMedia} ${aspectClass(aspect)}`}
+                                className={`${ui.dialogMedia} ${aspectClass(aspect)} ${extraClass}`}
                                 controls
                                 preload="metadata"
                               >
@@ -621,7 +683,7 @@ export default function PortfolioSite() {
                                 key={m.id}
                                 src={m.src}
                                 alt={m.alt ?? ''}
-                                className={`${ui.dialogMedia} ${aspectClass(aspect)}`}
+                                className={`${ui.dialogMedia} ${aspectClass(aspect)} ${extraClass}`}
                                 loading="lazy"
                               />
                             )
