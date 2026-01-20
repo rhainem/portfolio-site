@@ -297,7 +297,7 @@ export default function PortfolioSite() {
                   <ExternalLink size={16} className={styles.mutedIcon} />
                 </div>
 
-                <Separator />
+                {/* <Separator />
 
                 <div className={styles.socialRow}>
                   {PROFILE.socials.map((s) => (
@@ -305,7 +305,7 @@ export default function PortfolioSite() {
                       {s.label}
                     </a>
                   ))}
-                </div>
+                </div> */}
               </CardContent>
             </Card>
           </motion.div>
@@ -457,7 +457,7 @@ export default function PortfolioSite() {
               <div className={styles.aboutCardInner}>
                 <p className={styles.aboutParagraph}>
                   I build design systems that make brands feel consistent
-                  wherever they show up; packaging, editorial layouts, social
+                  wherever they show up: packaging, editorial layouts, social
                   templates, and product UI. My work balances craft and
                   constraints so teams can move fast without losing quality.
                 </p>
