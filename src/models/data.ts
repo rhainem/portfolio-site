@@ -6,7 +6,8 @@ export const PROFILE: Profile = {
   location: 'Auckland, NZ',
   tagline:
     'I design clear, confident brands and systems that scale across print + digital.',
-  email: '[redacted-email]',
+  email_user: 'hello',
+  email_domain: 'rhaine.anonaddy.com',
   availability: 'Available for work • 2026',
   socials: [{ label: 'LinkedIn', href: '#' }],
   resumeHref: '#',

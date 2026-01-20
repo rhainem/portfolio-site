@@ -218,7 +218,7 @@ export default function PortfolioSite() {
               </a>
             </Button> */}
             <Button asChild>
-              <a href={`mailto:${PROFILE.email}`}>
+              <a href={`mailto:${PROFILE.email_user}@${PROFILE.email_domain}`}>
                 <Mail size={16} className={styles.iconLeft} /> Contact
               </a>
             </Button>
@@ -266,7 +266,11 @@ export default function PortfolioSite() {
                   </a>
                 </Button>
                 <Button asChild variant="secondary">
-                  <a href={`mailto:${PROFILE.email}`}>Let’s talk</a>
+                  <a
+                    href={`mailto:${PROFILE.email_user}@${PROFILE.email_domain}`}
+                  >
+                    Let’s talk
+                  </a>
                 </Button>
               </div>
             </div>
@@ -582,7 +586,9 @@ export default function PortfolioSite() {
 
                 <div className={styles.contactActions}>
                   <Button asChild>
-                    <a href={`mailto:${PROFILE.email}`}>
+                    <a
+                      href={`mailto:${PROFILE.email_user}@${PROFILE.email_domain}`}
+                    >
                       <Mail size={16} className={styles.iconLeft} />
                       Email
                     </a>

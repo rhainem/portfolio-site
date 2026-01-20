@@ -35,7 +35,8 @@ export type Profile = {
   title: string
   location: string
   tagline: string
-  email: string
+  email_user: string
+  email_domain: string
   availability: string
   socials: { label: string; href: string }[]
   resumeHref: string
