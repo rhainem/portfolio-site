@@ -49,7 +49,7 @@ export type MediaGroup =
   | 'Socials'
   | 'Print'
   | 'Social Media Ads'
-  | 'EDM'
+  | 'EDMs'
   | 'Photography'
   | 'Preview'
   | 'Other'
@@ -60,5 +60,13 @@ export type ProjectMediaItem = {
   group: MediaGroup
   src: string
   alt?: string
-  aspect?: 'ultrawide' | 'banner' | 'wide' | 'square' | 'portrait' | 'auto'
+  aspect?:
+    | 'viewport'
+    | 'ultrawide'
+    | 'banner'
+    | 'wide'
+    | 'square'
+    | 'print'
+    | 'portrait'
+    | 'auto'
 }

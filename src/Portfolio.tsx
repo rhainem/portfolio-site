@@ -32,7 +32,7 @@ import {
 import type { SortKey, Project } from './models'
 import styles from './Portfolio.module.css'
 import ui from './components/ui/ui.module.css'
-import { ProjectMediaItem } from './models/types'
+import type { ProjectMediaItem } from './models/types'
 
 export default function PortfolioSite() {
   const reduceMotion = useReducedMotion()
@@ -113,10 +113,10 @@ export default function PortfolioSite() {
     return Array.from(groups.entries())
   }, [media])
 
-  const aspectClass = (
-    a?: 'ultrawide' | 'banner' | 'wide' | 'square' | 'portrait' | 'auto',
-  ) => {
+  const aspectClass = (a?: ProjectMediaItem['aspect']) => {
     switch (a) {
+      case 'viewport':
+        return ui.aspectViewport
       case 'ultrawide':
         return ui.aspectUltrawide
       case 'banner':
@@ -125,6 +125,8 @@ export default function PortfolioSite() {
         return ui.aspectWide
       case 'square':
         return ui.aspectSquare
+      case 'print':
+        return ui.aspectPrint
       case 'portrait':
         return ui.aspectPortrait
       default:
@@ -134,15 +136,20 @@ export default function PortfolioSite() {
 
   const aspectForGroup = (group: string) => {
     switch (group) {
-      case 'Hero':
+      case 'Heroes':
       case 'Web':
       case 'Preview':
         return 'wide'
-      case 'Social':
-      case 'Ads':
+      case 'Socials':
         return 'square'
+      case 'Social Media Ads':
+        return 'banner'
       case 'EDM':
+        return 'viewport'
+      case 'Print':
+        return 'print'
       case 'Photography':
+      case 'Print':
         return 'portrait'
       default:
         return 'auto'
@@ -153,7 +160,9 @@ export default function PortfolioSite() {
     switch (group) {
       case 'Web':
         return ui.galleryOneCol
-      case 'Social':
+      case 'Socials':
+        return ui.galleryThreeCol
+      case 'Social Media Ads':
         return ui.galleryThreeCol
       default:
         return ui.galleryTwoCol
@@ -574,6 +583,29 @@ export default function PortfolioSite() {
                         >
                           {items.map((m) => {
                             const aspect = m.aspect ?? aspectForGroup(m.group)
+
+                            if (aspect === 'viewport') {
+                              return (
+                                <div key={m.id} className={ui.aspectViewport}>
+                                  {m.kind === 'video' ? (
+                                    <video
+                                      className={ui.viewportMedia}
+                                      controls
+                                      preload="metadata"
+                                    >
+                                      <source src={m.src} type="video/mp4" />
+                                    </video>
+                                  ) : (
+                                    <img
+                                      src={m.src}
+                                      alt={m.alt ?? ''}
+                                      className={ui.viewportMedia}
+                                      loading="lazy"
+                                    />
+                                  )}
+                                </div>
+                              )
+                            }
 
                             return m.kind === 'video' ? (
                               <video
