@@ -1023,13 +1023,6 @@ export const PROJECTS: Project[] = [
         src: 'images/projects/g/image-2.jpg',
         aspect: 'auto',
       },
-      {
-        id: 'f-print-4',
-        kind: 'image',
-        group: 'Print',
-        src: 'images/projects/g/image-3.jpg',
-        aspect: 'auto',
-      },
     ],
   },
 
