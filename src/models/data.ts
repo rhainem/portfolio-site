@@ -1315,7 +1315,7 @@ export const PROJECTS: Project[] = [
         id: 'd-image-4',
         kind: 'image',
         group: 'Other',
-        src: 'images/projects/d/cover.jpg',
+        src: 'images/projects/d/image-4.jpg',
         aspect: 'wide',
       },
     ],
