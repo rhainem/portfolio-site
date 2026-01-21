@@ -36,7 +36,7 @@ export const PROJECTS: Project[] = [
       'Magento 2',
       'SilverStripe',
     ],
-    coverAlt: 'RS digital identity cover',
+    coverAlt: 'Rockshop Instagram post for competition',
     highlights: [
       'Planned, designed, and managed Meta ad campaigns: creative development, budget recommendations, and ongoing optimisation.',
       'Managed end-to-end EDM campaigns (design → build → send), supporting engagement and conversion goals.',
@@ -176,7 +176,7 @@ export const PROJECTS: Project[] = [
         kind: 'image',
         group: 'Heroes',
         src: 'images/projects/b/hero-9.jpg',
-        alt: 'joe satriani hero guitar transcripts',
+        alt: 'fulltone custom shop cs-ranger ad',
         aspect: 'ultrawide',
       },
       {
@@ -679,14 +679,14 @@ export const PROJECTS: Project[] = [
           'A cohesive, scalable marketing system supporting always-on execution—streamlined production, improved consistency, and enabled rapid campaign rollouts across paid, email, web, and in-store.',
       },
     ],
-    coverAlt: 'BB brand identity mockups',
+    coverAlt: 'KBB Music promotional material mockups',
     media: [
       {
         id: 'c-print-1',
         kind: 'image',
         group: 'Print',
         src: 'images/projects/c/print-1.jpg',
-        alt: 'BB project hero',
+        alt: 'KBB Music Woodwind Sale poster',
         aspect: 'print',
       },
       {
@@ -694,7 +694,7 @@ export const PROJECTS: Project[] = [
         kind: 'image',
         group: 'Print',
         src: 'images/projects/c/print-2.gif',
-        alt: 'BB project hero',
+        alt: 'KBB Music A4 POS tags',
         aspect: 'auto',
       },
       {
@@ -984,7 +984,7 @@ export const PROJECTS: Project[] = [
       'A logo and business card design developed for a Canadian-based counsellor, created to convey trust, guidance, and calm through a strong, symbolic concept.',
     role: 'Lead Designer',
     tools: ['Illustrator'],
-    coverAlt: 'RS digital identity cover',
+    coverAlt: 'Neil McNerney Business Card',
     highlights: [
       'Developed a logo concept based on guidance and reassurance',
       'Designed a high-contrast business card suited to print production',
@@ -1167,7 +1167,7 @@ export const PROJECTS: Project[] = [
         kind: 'image',
         group: 'Web',
         src: 'images/projects/e/web-1.jpg',
-        alt: 'screenshot of website',
+        alt: 'screenshot of website home hero',
         aspect: 'auto',
       },
       {
@@ -1175,7 +1175,7 @@ export const PROJECTS: Project[] = [
         kind: 'image',
         group: 'Web',
         src: 'images/projects/e/web-2.jpg',
-        alt: 'screenshot of website',
+        alt: 'screenshot of website reviews section',
         aspect: 'auto',
       },
       {
@@ -1183,7 +1183,7 @@ export const PROJECTS: Project[] = [
         kind: 'image',
         group: 'Web',
         src: 'images/projects/e/web-3.jpg',
-        alt: 'screenshot of website',
+        alt: 'screenshot of website FAQs section',
         aspect: 'auto',
       },
     ],
@@ -1265,7 +1265,7 @@ export const PROJECTS: Project[] = [
       'A series of original illustrations created to support a musician’s Patreon account, helping differentiate offerings and make the page more engaging and approachable for potential supporters.',
     role: 'Illustrator / Lead Designer',
     tools: ['Illustrator', 'Photoshop'],
-    coverAlt: 'RS digital identity cover',
+    coverAlt: 'Illustration of MdCL playing keys',
     highlights: [
       'Created custom illustrations based on the musician to represent membership tiers',
       'Maintained visual consistency across all tier assets',
