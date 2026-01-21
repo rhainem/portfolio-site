@@ -1137,7 +1137,7 @@ export const PROJECTS: Project[] = [
       'A playful yet polished website built in Webflow with a flexible CMS and subtle scroll animations to support ongoing updates. Inspired by a vibrant Instagram personality, brought to life through bold pink tones and a cohesive visual system.',
     role: 'Lead Designer',
     tools: ['Webflow', 'Figma', 'Photoshop', 'Illustrator'],
-    coverAlt: 'Website',
+    coverAlt: 'Boutique Dog Grooming website home hero',
     highlights: [
       'Designed and built in Webflow',
       'Dynamic, CMS-powered structure for flexible updates',
