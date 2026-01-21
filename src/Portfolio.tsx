@@ -43,6 +43,16 @@ export default function PortfolioSite() {
   >('All')
   const [openId, setOpenId] = useState<string | null>(null)
 
+  const withBase = (src: string) => {
+    // allow absolute / external URLs
+    if (/^(https?:)?\/\//.test(src)) return src
+
+    // remove leading slashes so BASE_URL works correctly
+    const clean = src.replace(/^\/+/, '')
+
+    return `${import.meta.env.BASE_URL}${clean}`
+  }
+
   const categories = useMemo(() => {
     const unique = Array.from(new Set(PROJECTS.map((p) => p.category)))
     unique.sort((a, b) => getCategoryOrder(a) - getCategoryOrder(b))
@@ -385,7 +395,7 @@ export default function PortfolioSite() {
                   >
                     <div className={styles.thumb}>
                       <img
-                        src={projectCover(p.id)}
+                        src={withBase(projectCover(p.id))}
                         alt={p.coverAlt}
                         className={styles.thumbImg}
                         loading="lazy"
@@ -619,7 +629,7 @@ export default function PortfolioSite() {
             <>
               <div className={ui.dialogHero}>
                 <img
-                  src={projectCover(active.id)}
+                  src={withBase(projectCover(active.id))}
                   alt={active.coverAlt}
                   className={ui.dialogHeroImg}
                 />
@@ -661,11 +671,14 @@ export default function PortfolioSite() {
                                       controls
                                       preload="metadata"
                                     >
-                                      <source src={m.src} type="video/mp4" />
+                                      <source
+                                        src={withBase(m.src)}
+                                        type="video/mp4"
+                                      />
                                     </video>
                                   ) : (
                                     <img
-                                      src={m.src}
+                                      src={withBase(m.src)}
                                       alt={m.alt ?? ''}
                                       className={ui.viewportMedia}
                                       loading="lazy"
@@ -682,12 +695,15 @@ export default function PortfolioSite() {
                                 controls
                                 preload="metadata"
                               >
-                                <source src={m.src} type="video/mp4" />
+                                <source
+                                  src={withBase(m.src)}
+                                  type="video/mp4"
+                                />
                               </video>
                             ) : (
                               <img
                                 key={m.id}
-                                src={m.src}
+                                src={withBase(m.src)}
                                 alt={m.alt ?? ''}
                                 className={`${ui.dialogMedia} ${aspectClass(aspect)} ${extraClass}`}
                                 loading="lazy"
