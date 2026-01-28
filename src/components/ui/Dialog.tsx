@@ -75,12 +75,16 @@ export function DialogContent({
     const panel = panelRef.current
     if (!panel) return
 
-    // ✅ ensure dialog always opens at the top
-    panel.scrollTop = 0
+    const scroller =
+      (panel.querySelector(`.${styles.dialogBody}`) as HTMLElement | null) ??
+      panel
 
-    // Focus the first focusable element, else focus panel itself
-    const focusables = getFocusable(panel)
-    ;(focusables[0] ?? panel).focus()
+    requestAnimationFrame(() => {
+      scroller.scrollTop = 0
+      panel.scrollTop = 0
+
+      panel.focus({ preventScroll: true })
+    })
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return

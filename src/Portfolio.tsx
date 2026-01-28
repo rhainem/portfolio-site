@@ -624,7 +624,7 @@ export default function PortfolioSite() {
         open={!!active}
         onOpenChange={(o) => setOpenId(o ? openId : null)}
       >
-        <DialogContent>
+        <DialogContent key={active?.id}>
           {active && (
             <>
               <div className={ui.dialogHero}>

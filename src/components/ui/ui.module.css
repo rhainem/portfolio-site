@@ -206,7 +206,7 @@
 
 /* Keep wide hero area, do not crop square images */
 .dialogHero {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 1920 / 1018;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   display: grid;
